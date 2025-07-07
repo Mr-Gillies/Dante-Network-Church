@@ -2,102 +2,105 @@
 
 ## Project Summary
 
-This project documents the full rebuild of our church’s audio infrastructure. Before 2022, we were entirely analog — no digital routing, no Dante, and no network scalability. As Worship Arts Pastor, I led the shift to a Dante-based IP audio network that now supports FOH, livestream, stage monitoring, and digital audio playback.
+This project documents our church’s move from a completely analog audio setup to a modern Dante-based IP network. Before 2022, we didn’t have digital routing, remote access, or any scalable way to manage FOH, livestream, or playback systems.
 
-The final system includes four dedicated Mac Minis running Ableton Live, ProPresenter, LightKey, and Dante Virtual Soundcard — all synchronized over a VLAN-isolated Dante network with centralized control.
+I led the shift as Worship Arts Pastor, but I was supported every step of the way by our volunteer IT and Audio teams. The result was a full rebuild that brought our system into the digital age — with room to grow.
+
+We now run FOH, livestream, Ableton playback, lighting, and stage monitoring across a VLAN-isolated Dante network with centralized control.
 
 ## My Role
 
-I served as project lead with full authority over direction, budgeting, purchasing, and technical deployment. My responsibilities included:
+I served as the project lead — planning, budgeting, and coordinating implementation. I leaned heavily on our IT and audio volunteers for key pieces like switch configuration, cabling, and VLAN setup.
 
-- Building a line-item budget with links, costs, and justifications
-- Presenting to leadership and securing a $50,000 CAD budget
-- Directing the IT team on static IPs, subnet design, and VLAN segmentation
-- Selecting gear, overseeing procurement, and managing vendor logistics
-- Designing the routing and network flow using Dante Controller and AES50
-- Installing cabling (Cat6, SDI) across facilities including attic work
-- Setting up failover and remote access support for live operations
-- Maintaining weekly Dante routing and Ableton integration
+My part in this included:
 
-This project modernized our entire workflow — from analog and patch bays to digital IP audio, fully documented and team-ready.
+- Proposing the upgrade and presenting to leadership
+- Drafting the full $50,000 CAD budget (and staying under it)
+- Coordinating IP assignments, static routes, and VLANs with our IT team
+- Selecting gear, managing vendors, and receiving equipment
+- Designing Dante + AES50 routing to fit our multi-room workflow
+- Running cable (SDI, Cat5e, DMX, Cat6 shielded, XLR) across the building
+- Enabling remote support via TeamViewer with MFA
+
+I also wrote out documentation so the team could understand and support the system going forward.
 
 ## Why We Chose Dante
 
-In 2022, there was hesitation around using Dante. It was unfamiliar, and most of our volunteers were used to analog methods. I made the call to move forward based on:
+Dante wasn’t an obvious choice at first — a lot of us were used to analog boards and patch panels. But the need to separate livestream audio and FOH, along with the flexibility to route audio between rooms, led us to commit to it.
 
-- The need to separate FOH and livestream mixes
-- Flexible routing of tracks and stems between multiple systems
-- Reducing signal degradation and analog grounding noise
-- Remote access and diagnostics through a centralized controller
-- Future scalability (lighting, MIDI, livestream sync)
+We chose Dante because it allowed us to:
 
-Dante offered the best long-term path for reliable, scalable audio infrastructure.
+- Keep FOH, livestream, and stage IEM mixes independent
+- Send audio/midi/stems between rooms with zero signal loss
+- Use Dante Controller to adapt routing in real time
+- Add lighting/MIDI support over IP in the future
+- Train volunteers with consistent and predictable workflows
 
 ## System Overview
 
-- **Midas M32** FOH console with Dante expansion card (master clock & sync)
-- **Behringer X32 Rack** monitor console via AES50
-- **Two DL16** stage boxes (daisy-chained via AES50 for stage I/O)
-- **Four Mac Minis**:
-  - Ableton playback (clicks, cues, stems)
-  - Livestream (Ableton Live mixing)
-  - ProPresenter (media + Spotify)
-  - LightKey (stage lighting)
-- **All Macs connected via Dante VLAN** with static IPs and managed switch
-- **Dante Controller** for signal flow configuration and monitoring
-- **TeamViewer with MFA** installed on all Macs for secure remote control
-
-The M32 handled all Dante routing to and from stage, playback, and broadcast systems.
+- **Midas M32** FOH console (Dante card installed – master clock)
+- **Behringer X32 Rack** (for IEMs — connected via AES50)
+- **Two DL16** stage boxes (AES50 daisy-chained)
+- **Mac Minis**:
+  - Livestream: Receives audio + pushes to Resi/YouTube
+  - Ableton: Multitracks, cues, stems
+  - ProPresenter: Slides, video, and Spotify
+  - LightKey: Lighting control
+- **Dante VLAN** with static IPs + managed switches
+- **Dante Controller** for signal routing + sync
+- **Remote access** via TeamViewer (with MFA) for FOH and Livestream computers
 
 ## Budget and Procurement
 
-I created and managed the entire procurement workflow using a detailed spreadsheet with URLs, categories, and cost tracking. I worked closely with church leadership to control costs while building for future expansion.
+I managed the full purchasing and vendor workflow using spreadsheets and leadership review. We reused what we could and upgraded what was needed for long-term reliability.
 
 - **Approved Budget**: $50,000 CAD  
-- **Final Spend**: $45,525.96 CAD  
-- **Savings**: ~$4,474
+- **Actual Spend**: $45,525.96 CAD  
+- **Savings**: ~$4,474 CAD
 
-We reused gear where possible and prioritized long-term durability over short-term convenience.
+## Weekly Ops
 
-## Weekly Responsibilities
+Each week I support Sunday operations by:
 
-Each week, I continue to oversee system function and readiness:
-
-- Manage Dante routing for FOH, livestream, and IEMs
-- Confirm sync and signal flow between Macs and consoles
-- Reassign Ableton output channels for updated setlists
-- Support the team with training, troubleshooting, and routing adjustments
+- Adjusting Dante routing for FOH/livestream
+- Updating Ableton channel outputs for multitrack sessions
+- Troubleshooting sync and routing issues
+- Helping volunteers rotate through the AV/Livestream stations (7 operators per week)
 
 ## Cloud/Security Relevance
 
-While this wasn’t a traditional cloud project, the parallels are strong:
+This wasn’t a cloud project, but it mirrors a lot of cloud principles:
 
-- **VLANs & IP Planning** mirror cloud VPC/subnet design
-- **Static routing** is similar to managing service endpoints
-- **TeamViewer with MFA** parallels bastion access/gateway control
-- **Dante Controller** is effectively a real-time control plane
-- **Weekly ops and incident handling** reflect uptime SLAs and change management
+- **VLANs, subnets, and static IPs** are like designing secure VPCs
+- **Dante Controller** acts like a real-time control plane
+- **TeamViewer MFA** is similar to jump-host or bastion access
+- **Ongoing routing changes and logging** reflect change control + uptime
 
-This project required secure architecture, documentation, and hands-on ops — skills that translate directly into cloud and security roles.
+The experience here — designing secure, scalable infrastructure with weekly ops — aligns well with cloud security architecture work.
 
 ## Documentation
 
-- `docs/setup.md`: Full install and routing guide
-- `docs/ableton-routing-map.md`: Return track sends → Dante channels
-- `docs/dante-routing-overview.md`: Input/output routing across devices
-- `docs/failover-remote-access.md`: Remote control and recovery plan
-- `docs/budget-summary.md`: Final cost categories and budget notes
+- `docs/setup.md`: Full install + routing setup
+- `docs/ableton-routing-map.md`: How return tracks map to Dante channels
+- `docs/dante-routing-overview.md`: System-wide Dante signal flow
+- `docs/failover-remote-access.md`: Remote control plans + recovery notes
+- `docs/budget-summary.md`: Full itemized cost breakdown
+- `images/docs/legacy/README.md`: Original brainstorm drawings and sketches
 
 ## Final Thoughts
 
-This was a ground-up infrastructure upgrade with real operational weight. I was fully responsible for the outcome — from the attic wiring to the last Ableton channel. What we built is reliable, maintainable, and modern.
+While I don’t pretend to be a network engineer, this project taught me a lot — not just about Dante and VLANs, but also how to lead a team and build systems that others can use and support.
 
-**Project Lead**: Worship Arts Pastor
+I’m proud of what we built together. It’s reliable, flexible, and future-ready — thanks to collaboration, planning, and a great volunteer team.
+
+**Project Lead**: Ryan Gillies (Worship Arts Pastor)  
+**Collaborators**: Volunteer Audio + IT Team
 
 ---
 
 ### Security & Privacy Notice
 
-This public repo omits full budget line items, serial numbers, and internal access credentials in order to protect sensitive organizational data. Detailed procurement tracking was done internally and included vendor links, pricing, and invoicing.
+This repo avoids exposing any sensitive info — no IP addresses, MAC addresses, or login credentials are shared here. Procurement docs with serials, vendor info, and invoices are stored privately. All remote access is MFA-protected.
 
-As someone pursuing cloud security, I take care not to expose confidential or infrastructure-specific information unnecessarily. This documentation highlights the architecture and leadership behind the project — not privileged or sensitive data.
+This documentation exists to show the architecture, teamwork, and planning behind the system — not to expose private infrastructure.
+

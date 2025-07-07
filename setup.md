@@ -1,72 +1,88 @@
-## 3. Dante & AES50 Routing Architecture (Network-Focused)
+# System Setup & Routing Overview
 
-The Midas M32 acted as the **core of the system** — both the Dante master clock and the hub for signal routing. All audio sources and destinations passed through the M32, making it the central point for both **Dante-based digital audio** and **AES50 analog-stage routing**.
+## 1. Dante & AES50 Routing — How We Connected Everything
 
----
+This setup outlines how our Dante audio network and AES50 stage connections were wired and routed. This was a learning experience for me and our team — and I’m thankful for the volunteer IT and Audio support that helped make it possible.
 
-### Stage & Monitor Design
-
-- Two DL16 stage boxes were **daisy-chained via AES50** and connected directly to the **M32 console**.
-- These boxes were placed **stage left and stage right**, giving us physical XLR I/O on both sides of the platform.
-- From the M32, signals were passed **via AES50 to the X32 Rack**, which handled **in-ear monitor mixes** independently of FOH.
-- The **X32 sent monitor outputs back** through the AES50 chain to the DL16 outputs, which were hardwired to our **IEM transmitter rack**.
-
-This layout resolved long-standing FOH vs. IEM balance issues by **separating the monitor mix architecture from the main house mix**, while keeping stage wiring clean and scalable.
+The **Midas M32 console** acts as the heart of the system, providing both the **master clock for Dante** and the main routing hub for all audio signals.
 
 ---
 
-### Dante Routing Summary
+## Stage and Monitoring Design
 
-The Dante network was built on:
+- Two DL16 stage boxes were installed on either side of the stage and **daisy-chained via AES50**.
+- Those connect directly to the **M32**, which serves as our FOH console.
+- The M32 also feeds signals to our **X32 Rack**, which handles **in-ear monitor mixing** for the band.
+- The X32 then returns those mixes back out to the DL16s, which feed the **IEM transmitters**.
 
-- **Static IPs** in a private subnet (e.g., 192.168.5.x)
-- **Dedicated VLAN** for Dante traffic, isolated from general IT traffic
-- **Managed 1 Gbps switch** used for all Dante-connected endpoints
-- **M32** as the Dante sync master and primary TX/RX endpoint
-- **Dante Controller** used to manage routing maps weekly
-
-#### Inputs to M32 (via Dante RX)
-
-- **ProPresenter Mac Mini**
-  - Channels 1–2: Spotify
-  - Channels 3–4: ProPresenter Audio
-
-- **Ableton (Loop) Mac Mini**
-  - Channel 1: Click
-  - Channel 2: Cues
-  - Channels 3–4: Reference audio
-  - Channels 5–12: Multitracks (Percussion, Drums, Bass, Keys, etc.)
-  - Channels 13–16: BGVs or extra stems
-  - Channels 21–32: Reserved/flexible stems for special arrangements
-
-#### Outputs from M32 to Livestream Mac (via Dante TX)
-
-- Channels 1–24: FOH stem groups (e.g., drums, bass, AG, EG, keys, vocals)
-- Channels 17–32: Direct stereo loop sends (mirrored from Ableton)
-- Channels 1–4: ProPresenter/Spotify (redundant)
-- Channels 45–48: Reserved for overflow, special routes, or future use
-
-#### Output to FOH System
-
-- M32 master stereo bus routed to Channels 31–32
-- Received by the DSP or speaker processor directly via Dante
+This keeps our FOH mix and monitor mix separate — a big win in terms of clarity and volunteer workflow. It also keeps the stage cabling minimal and easy to manage.
 
 ---
 
-### Network & Routing Design Intent
+## Dante Network Summary
 
-Before this upgrade, our system was entirely **analog, patch-based, and limited** in flexibility. There was no reliable way to isolate different mixes or add flexibility without significant rewiring.
+We set up a dedicated Dante network that runs independently from our regular church IT systems. That included:
 
-As project lead, I moved us toward Dante because:
-
-- It allowed **separation of FOH and livestream mixes**
-- We could assign and reassign routing digitally without physical patching
-- It reduced analog noise and interference
-- It enabled **remote monitoring and failover support**
-- It offered long-term scalability for additional endpoints (e.g., lighting, automation)
-
-All Dante endpoints — including the M32 and all Mac Minis — were configured with static IPs and properly clocked via the M32. Each computer used **Dante Virtual Soundcard**, and routing was fully managed through Dante Controller.
+- **Static IPs** on a private Dante subnet
+- **Dedicated VLAN** just for Dante traffic
+- **Managed gigabit switch**
+- **M32** as the Dante clock master
+- **Dante Controller** to manage audio routing
 
 ---
 
-This setup gave us a clean, scalable, and reliable infrastructure — replacing patch chaos with centralized, network-based audio that’s maintained weekly and built for growth.
+### Dante Inputs (to M32)
+
+- **ProPresenter Mac Mini**  
+  - Ch 1–2: Spotify  
+  - Ch 3–4: Video/audio playback
+
+- **Ableton Loop Mac Mini**  
+  - Ch 1: Click  
+  - Ch 2: Cues  
+  - Ch 3–4: Reference  
+  - Ch 5–12: Multitracks (e.g., drums, bass, keys, etc.)  
+  - Ch 13–16: Extra vocals or stems  
+  - Ch 21–32: Reserved for special songs/setups
+
+---
+
+### Dante Outputs (from M32)
+
+- Ch 1–24: FOH instrument groups (drums, AG, EG, vocals, etc.)
+- Ch 17–32: Ableton stems (sent to Livestream)
+- Ch 1–4: ProPresenter/Spotify (mirrored as needed)
+- Ch 45–48: Overflow channels, future use
+
+---
+
+### FOH Speaker Output
+
+- The M32 stereo master mix is routed to Dante Ch 31–32.
+- We use a **Dante AVIO XLR adapter** to convert that digital signal to analog for our speaker processor.
+
+---
+
+## Why We Went This Route
+
+Before this, we were running an entirely analog setup. Patch cables, shared mixes, and no way to expand without more wiring. It worked, but it was limiting.
+
+We chose Dante because it gave us:
+
+- Clean separation between FOH and livestream audio
+- Digital routing (no more crawling under desks to rewire)
+- Reduced analog noise and better signal quality
+- Remote monitoring and backup access
+- Future-proofing for lighting, MIDI, and more
+
+We’re still learning, but this system has made our weekly services smoother and more flexible — especially with volunteers rotating through different stations.
+
+---
+
+## Notes on Networking
+
+Each Dante computer runs **Dante Virtual Soundcard**, and everything is kept in sync with the M32 as the primary clock. All devices use static IPs, and routing is handled using **Dante Controller** each week based on the current service layout.
+
+---
+
+This isn’t a perfect system — but it’s been a solid one. It helped us move from a patch-heavy analog world into something that’s digital, reliable, and scalable for the future. Grateful to have had help from our volunteer team every step of the way.
