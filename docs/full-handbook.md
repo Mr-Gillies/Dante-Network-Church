@@ -22,7 +22,8 @@ This guide outlines the key steps for operating our AV network each week. It’s
 ---
 
 This handbook exists so team members don’t have to guess — it reflects the actual flow we’ve built, tested, and use every week.
-ystem Handbook
+
+System Handbook
 
 This guide outlines the key steps for operating our AV network each week. It’s designed to support team members — especially rotating volunteers — and keep our systems consistent, stable, and recoverable.
 
